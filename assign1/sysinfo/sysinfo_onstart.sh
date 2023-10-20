@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Student Name : Tae-u Gim
+#Student Number : 200498422
+
 # Variables that will replace each value corresponding to each section.
 USER=$(whoami)
 DATETIME=$(date)
@@ -41,7 +44,7 @@ USED=$(cat /proc/meminfo | grep allocUsed | awk '{print $2}')
 MEMFREE=`expr "$TOTAL" "-" "$USED"`
 UFW=$(sudo ufw show added | grep ^ufw)
 
-
+# Replace the value each section for printing.
 while read LINE;do
 	if [[ "$LINE" == *USERNAME* ]];then
 		echo $LINE | sed "s/USERNAME/$USER/g" | sed "s/DATE\/TIME/$DATETIME/g" 
