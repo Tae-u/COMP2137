@@ -1,0 +1,34 @@
+---
+
+- name: target1-play
+  hosts: target1
+  remote_user: remoteadmin
+  tasks:
+    - name: install apache2 on target1
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: add a firewall rule port 22
+      shell: ufw allow 22/tcp 
+    - name: add a firewall rule port 80
+      shell: ufw allow 80/tcp
+    - name: enable ufw
+      community.general.ufw:
+        state: enabled
+- name: target2-play
+  hosts: target2
+  remote_user: remoteadmin
+  tasks:
+    - name: install mysql on target2
+      apt:
+        name: mysql-server
+        state: present
+        update_cache: yes
+    - name: add a firewall rule port 22
+      shell: ufw allow 22/tcp
+    - name: add a firewall rule port 3306
+      shell: ufw allow 3306/tcp
+    - name: enable ufw
+      community.general.ufw:
+        state: enabled
